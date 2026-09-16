@@ -107,6 +107,14 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
     </section>
 
     <section class="card">
+      <h2>Trước khi đặt lịch</h2>
+      <div class="notice"><b>Tình trạng xe:</b> Giá áp dụng cho xe ở tình trạng bình thường. Xe quá bẩn, vết bẩn nặng, nhiều lông thú cưng, nhiều rác, vết nước ăn mòn hoặc tình trạng cần thêm nhiều thời gian có thể phát sinh phụ phí. <b>Chúng tôi sẽ giải thích và xin bạn đồng ý trước khi làm thêm hoặc tính thêm phí.</b></div>
+      <div class="mini" style="margin-top:10px"><b>Kết quả có thể khác nhau:</b> Một số vết bẩn, mùi, vết xước, lỗi sơn, vết nước ăn mòn hoặc hư hỏng vĩnh viễn có thể không thể loại bỏ hoàn toàn. Đánh bóng sơn 1 bước phù hợp với các khuyết điểm nhẹ đến trung bình.</div>
+      <div class="mini" style="margin-top:10px"><b>Địa điểm &amp; tiếp cận:</b> Vui lòng bảo đảm dịch vụ lưu động được phép tại nhà, căn hộ, condo, HOA, nơi làm việc hoặc địa điểm của bạn và xe có thể được tiếp cận an toàn. Thời tiết có thể khiến lịch hẹn phải đổi.</div>
+      <div class="mini" style="margin-top:10px"><b>Tình trạng có sẵn:</b> Vui lòng cho chúng tôi biết trước về hư hỏng đã có, chi tiết lỏng hoặc bong tróc. Chúng tôi có thể chụp ảnh trước khi làm để ghi nhận tình trạng xe.</div>
+    </section>
+
+    <section class="card">
       <h2>Lịch hẹn</h2>
       <div class="grid">
         <div><label for="date">Ngày mong muốn</label><input type="date" id="date" required></div>
@@ -142,6 +150,7 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
       </div>
       <label class="inline" style="font-weight:500"><input id="ack" type="checkbox" required> Tôi hiểu và đồng ý.</label>
       <label for="payment">Phương thức thanh toán</label>
+      <div class="mini" style="margin-top:8px">Thanh toán khi hoàn tất dịch vụ, trừ khi có thỏa thuận khác. Số tiền cuối cùng sẽ thể hiện dịch vụ, phí di chuyển và mọi phần việc thêm mà bạn đã đồng ý.</div>
       <select id="payment"><option value="Cash">Cash</option><option value="Zelle">Zelle</option><option value="Venmo">Venmo</option></select>
       <div id="formError" class="error"></div>
       <button class="btn" id="reviewBtn" type="button">Xem lại lịch đặt</button>
@@ -169,7 +178,7 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
 
 <footer>
   Dịch vụ lưu động tự chủ — chúng tôi tự mang nước và điện.<br>
-  Có thể phát sinh phụ phí đối với xe quá bẩn, vết bẩn nặng, nhiều lông thú cưng hoặc tình trạng cần thêm thời gian.
+  Ngày và giờ bạn yêu cầu sẽ được xác nhận lại.
 </footer>
 
 <script>
@@ -195,7 +204,7 @@ const PACKAGE_NAMES={
 };
 
 const ADDONS=[
- {key:"pet_hair_removal",name:"Loại bỏ lông thú cưng",prices:{sedan:45,suv:45,large:45}},
+ {key:"pet_hair_removal",name:"Loại bỏ lông thú cưng",prices:{sedan:45,suv:45,large:45},from:true},
  {key:"seat_shampoo",name:"Giặt ghế",prices:{sedan:45,suv:45,large:45}},
  {key:"leather_cleaning_conditioning",name:"Làm sạch & dưỡng da",prices:{sedan:45,suv:45,large:45}},
  {key:"carpet_shampoo",name:"Giặt thảm",prices:{sedan:45,suv:45,large:45}},
@@ -203,6 +212,7 @@ const ADDONS=[
  {key:"iron_decon",name:"Iron Decon",prices:{sedan:35,suv:35,large:35}},
  {key:"tar_bug_wax_removal",name:"Tẩy nhựa đường, côn trùng & wax",prices:{sedan:35,suv:35,large:35}},
  {key:"spot_spray_treatment",name:"Xử lý vết bẩn",prices:{sedan:45,suv:45,large:45}},
+ {key:"water_spot_treatment",name:"Xử lý vết nước",prices:{sedan:45,suv:45,large:45},from:true},
  {key:"black_trim_restoration",name:"Phục hồi nhựa đen",prices:{sedan:45,suv:50,large:55}},
  {key:"headlight_restoration",name:"Phục hồi đèn pha",prices:{sedan:50,suv:50,large:50}},
  {key:"one_step_paint_correction",name:"Đánh bóng sơn 1 bước",prices:{sedan:165,suv:185,large:205},packages:["express","deluxe"]}
@@ -231,7 +241,7 @@ function refreshAddonOptions(){
     if(!allowed) input.checked=false;
     input.dataset.price=price;
     label.classList.toggle("disabled",!allowed);
-    label.querySelector(".addonPrice").textContent=v?"$"+price:"$—";
+    label.querySelector(".addonPrice").textContent=v?(a.from?"Từ $"+price:"$"+price):"$—";
   });
 }
 
