@@ -79,15 +79,17 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
         <article class="package" data-package="paint_correction">
           <h3>Đánh Bóng Sơn 1 Bước</h3><div class="price" id="price-paint_correction">Chọn xe</div>
           <div class="mini">Chỉ ngoại thất • Không bao gồm vệ sinh nội thất</div>
-          <ul><li>Rửa xe bên ngoài &amp; phun bọt tuyết</li><li>Làm sạch mâm xe &amp; lốp</li><li>Dưỡng lốp</li><li>Làm sạch kính &amp; gương bên ngoài</li><li>Khử nhiễm / chuẩn bị bề mặt sơn</li><li>Đánh bóng sơn bằng máy 1 bước</li><li>Phù hợp với khuyết điểm nhẹ đến trung bình trên sơn</li></ul>
+          <ul><li>Rửa xe bên ngoài &amp; phun bọt tuyết</li><li>Làm sạch mâm xe &amp; lốp</li><li>Dưỡng lốp</li><li>Làm sạch kính &amp; gương bên ngoài</li><li>Khử nhiễm / chuẩn bị bề mặt sơn</li><li>Đánh bóng sơn bằng máy 1 bước</li><li>Phủ sealant &amp; bảo vệ sơn</li><li>Phù hợp với khuyết điểm nhẹ đến trung bình trên sơn</li></ul>
         </article>
       </div>
     </section>
 
     <section class="card">
       <h2>Dịch vụ thêm</h2>
-      <p class="desc">Bạn có thể thêm các dịch vụ tùy chọn. Đánh bóng sơn 1 bước chỉ có thể chọn thêm khi dùng Express Detail hoặc Deluxe Detail.</p>
+      <p class="desc">Bạn có thể thêm các dịch vụ tùy chọn. Express sử dụng Gói Đánh bóng sơn 1 bước; Deluxe sử dụng dịch vụ bổ sung Đánh bóng sơn 1 bước.</p>
       <div id="addons"></div>
+      <div class="mini" style="margin-top:10px"><strong>Gói Express:</strong> gồm đánh bóng sơn 1 bước, chuẩn bị bề mặt, khử nhiễm sơn và phủ sealant &amp; bảo vệ sơn.</div>
+      <div class="mini" style="margin-top:6px"><strong>Deluxe:</strong> khử nhiễm sơn và phủ sealant &amp; bảo vệ sơn đã có trong gói Deluxe.</div>
     </section>
 
     <section class="card">
@@ -104,14 +106,6 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
         <div class="row"><span>Phí di chuyển</span><b id="sumTravel">$0</b></div>
         <div class="row grand"><span>Tổng dự kiến</span><span id="total">$0</span></div>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>Trước khi đặt lịch</h2>
-      <div class="notice"><b>Tình trạng xe:</b> Giá áp dụng cho xe ở tình trạng bình thường. Xe quá bẩn, vết bẩn nặng, nhiều lông thú cưng, nhiều rác, vết nước ăn mòn hoặc tình trạng cần thêm nhiều thời gian có thể phát sinh phụ phí. <b>Chúng tôi sẽ giải thích và xin bạn đồng ý trước khi làm thêm hoặc tính thêm phí.</b></div>
-      <div class="mini" style="margin-top:10px"><b>Kết quả có thể khác nhau:</b> Một số vết bẩn, mùi, vết xước, lỗi sơn, vết nước ăn mòn hoặc hư hỏng vĩnh viễn có thể không thể loại bỏ hoàn toàn. Đánh bóng sơn 1 bước phù hợp với các khuyết điểm nhẹ đến trung bình.</div>
-      <div class="mini" style="margin-top:10px"><b>Địa điểm &amp; tiếp cận:</b> Vui lòng bảo đảm dịch vụ lưu động được phép tại nhà, căn hộ, condo, HOA, nơi làm việc hoặc địa điểm của bạn và xe có thể được tiếp cận an toàn. Thời tiết có thể khiến lịch hẹn phải đổi.</div>
-      <div class="mini" style="margin-top:10px"><b>Tình trạng có sẵn:</b> Vui lòng cho chúng tôi biết trước về hư hỏng đã có, chi tiết lỏng hoặc bong tróc. Chúng tôi có thể chụp ảnh trước khi làm để ghi nhận tình trạng xe.</div>
     </section>
 
     <section class="card">
@@ -150,7 +144,6 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
       </div>
       <label class="inline" style="font-weight:500"><input id="ack" type="checkbox" required> Tôi hiểu và đồng ý.</label>
       <label for="payment">Phương thức thanh toán</label>
-      <div class="mini" style="margin-top:8px">Thanh toán khi hoàn tất dịch vụ, trừ khi có thỏa thuận khác. Số tiền cuối cùng sẽ thể hiện dịch vụ, phí di chuyển và mọi phần việc thêm mà bạn đã đồng ý.</div>
       <select id="payment"><option value="Cash">Cash</option><option value="Zelle">Zelle</option><option value="Venmo">Venmo</option></select>
       <div id="formError" class="error"></div>
       <button class="btn" id="reviewBtn" type="button">Xem lại lịch đặt</button>
@@ -178,7 +171,7 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
 
 <footer>
   Dịch vụ lưu động tự chủ — chúng tôi tự mang nước và điện.<br>
-  Ngày và giờ bạn yêu cầu sẽ được xác nhận lại.
+  Có thể phát sinh phụ phí đối với xe quá bẩn, vết bẩn nặng, nhiều lông thú cưng hoặc tình trạng cần thêm thời gian.
 </footer>
 
 <script>
@@ -204,18 +197,18 @@ const PACKAGE_NAMES={
 };
 
 const ADDONS=[
- {key:"pet_hair_removal",name:"Loại bỏ lông thú cưng",prices:{sedan:45,suv:45,large:45},from:true},
- {key:"seat_shampoo",name:"Giặt ghế",prices:{sedan:45,suv:45,large:45}},
+ {key:"pet_hair_removal",name:"Loại bỏ lông thú cưng",prices:{sedan:45,suv:45,large:45}},
+ {key:"seat_shampoo",name:"Giặt ghế",prices:{sedan:45,suv:50,large:60}},
  {key:"leather_cleaning_conditioning",name:"Làm sạch & dưỡng da",prices:{sedan:45,suv:45,large:45}},
  {key:"carpet_shampoo",name:"Giặt thảm",prices:{sedan:45,suv:45,large:45}},
- {key:"paint_decon_hand_wax",name:"Khử nhiễm sơn + Wax bằng tay",prices:{sedan:55,suv:65,large:75}},
+ {key:"paint_decon_hand_wax",name:"Khử nhiễm sơn + Wax bằng tay",prices:{sedan:55,suv:65,large:75},packages:["basic","interior","deluxe"]},
  {key:"iron_decon",name:"Iron Decon",prices:{sedan:35,suv:35,large:35}},
  {key:"tar_bug_wax_removal",name:"Tẩy nhựa đường, côn trùng & wax",prices:{sedan:35,suv:35,large:35}},
  {key:"spot_spray_treatment",name:"Xử lý vết bẩn",prices:{sedan:45,suv:45,large:45}},
- {key:"water_spot_treatment",name:"Xử lý vết nước",prices:{sedan:45,suv:45,large:45},from:true},
  {key:"black_trim_restoration",name:"Phục hồi nhựa đen",prices:{sedan:45,suv:50,large:55}},
  {key:"headlight_restoration",name:"Phục hồi đèn pha",prices:{sedan:50,suv:50,large:50}},
- {key:"one_step_paint_correction",name:"Đánh bóng sơn 1 bước",prices:{sedan:165,suv:185,large:205},packages:["express","deluxe"]}
+ {key:"express_paint_correction_bundle",name:"Gói Đánh bóng sơn 1 bước",prices:{sedan:225,suv:245,large:265},packages:["express"]},
+ {key:"one_step_paint_correction",name:"Đánh bóng sơn 1 bước",prices:{sedan:170,suv:190,large:220},packages:["deluxe"]}
 ];
 
 const $=id=>document.getElementById(id);
@@ -241,7 +234,7 @@ function refreshAddonOptions(){
     if(!allowed) input.checked=false;
     input.dataset.price=price;
     label.classList.toggle("disabled",!allowed);
-    label.querySelector(".addonPrice").textContent=v?(a.from?"Từ $"+price:"$"+price):"$—";
+    label.querySelector(".addonPrice").textContent=v?"$"+price:"$—";
   });
 }
 

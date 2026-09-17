@@ -74,20 +74,22 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
         </article>
         <article class="package" data-package="deluxe">
           <h3>Deluxe Detail</h3><div class="price" id="price-deluxe">Select vehicle</div>
-          <ul><li>Everything in Express</li><li>Full interior cleaning</li><li>Fabric seat shampoo OR leather cleaning &amp; conditioning</li><li>Carpet &amp; mat shampoo</li><li>Paint decontamination</li><li>Paint sealant &amp; protection</li></ul>
+          <ul><li>Everything in Express</li><li>Full interior cleaning</li><li>Seats cleaned</li><li>Carpet &amp; mat shampoo</li><li>Paint decontamination</li><li>Paint sealant &amp; protection</li></ul>
         </article>
         <article class="package" data-package="paint_correction">
           <h3>1-Step Paint Correction</h3><div class="price" id="price-paint_correction">Select vehicle</div>
           <div class="mini">Exterior only • No interior detail</div>
-          <ul><li>Exterior wash &amp; foam cannon</li><li>Wheels &amp; tires cleaned</li><li>Tire dressing</li><li>Exterior windows &amp; mirrors</li><li>Paint decontamination / prep</li><li>1-step machine paint correction</li><li>Best for light-to-moderate paint imperfections</li></ul>
+          <ul><li>Exterior wash &amp; foam cannon</li><li>Wheels &amp; tires cleaned</li><li>Tire dressing</li><li>Exterior windows &amp; mirrors</li><li>Paint decontamination / prep</li><li>1-step machine paint correction</li><li>Paint sealant &amp; protection</li><li>Best for light-to-moderate paint imperfections</li></ul>
         </article>
       </div>
     </section>
 
     <section class="card">
       <h2>Add-On Services</h2>
-      <p class="desc">Optional services can be added to your package. 1-Step Paint Correction is available as an add-on with Express and Deluxe Detail only.</p>
+      <p class="desc">Optional services can be added to your package. Express uses a dedicated 1-Step Paint Correction Bundle; Deluxe uses the 1-Step Paint Correction add-on.</p>
       <div id="addons"></div>
+      <div class="mini" style="margin-top:10px"><strong>Express 1-Step Paint Correction Bundle:</strong> includes 1-step machine correction, panel prep, paint decontamination, and paint sealant &amp; protection.</div>
+      <div class="mini" style="margin-top:6px"><strong>Deluxe 1-Step Paint Correction:</strong> paint decontamination and paint sealant &amp; protection are already included in Deluxe.</div>
     </section>
 
     <section class="card">
@@ -104,14 +106,6 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
         <div class="row"><span>Travel fee</span><b id="sumTravel">$0</b></div>
         <div class="row grand"><span>Estimated Total</span><span id="total">$0</span></div>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>Before You Book</h2>
-      <div class="notice"><b>Vehicle condition:</b> Prices cover vehicles in normal condition. Excessive dirt, heavy stains, severe pet hair, excessive trash, etched water spots, or other conditions that require significantly more time may require an additional charge. <b>We will explain and get your approval before extra work or charges.</b></div>
-      <div class="mini" style="margin-top:10px"><b>Results vary:</b> Some stains, odors, scratches, paint defects, water-spot etching, and other permanent damage may not be completely removable. 1-Step Paint Correction is intended for light-to-moderate paint imperfections.</div>
-      <div class="mini" style="margin-top:10px"><b>Location &amp; access:</b> Please make sure mobile detailing is permitted at your home, apartment, condo, HOA, workplace, or other location and that we have safe access to the vehicle. Weather may require rescheduling.</div>
-      <div class="mini" style="margin-top:10px"><b>Existing condition:</b> Please tell us about known damage or loose/peeling components before service. We may photograph the vehicle before work to document its condition.</div>
     </section>
 
     <section class="card">
@@ -143,12 +137,13 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
     </section>
 
     <section class="card">
-      <div class="notice"><b>Before we arrive:</b> Please remove personal belongings and trash. If significant trash removal is needed, a <b>$15–$20 surcharge</b> may apply.</div>
-      <label class="inline" style="font-weight:500"><input id="ack" type="checkbox" required> I understand the vehicle-condition and additional-charge policy.</label>
-      <label class="inline" style="font-weight:500"><input id="ack2" type="checkbox" required> I will remove personal belongings/trash and make sure the location is safe and mobile detailing is permitted.</label>
-      <label class="inline" style="font-weight:500"><input id="ack3" type="checkbox" required> I understand results vary and some permanent stains, damage, or paint defects may not be fully removable.</label>
+      <div class="notice">
+        <b>Before we arrive:</b> Please remove all personal belongings and trash from your vehicle before service.
+        This helps protect your belongings and allows us to focus on detailing. If trash removal is needed,
+        a <b>$15–$20 surcharge</b> may apply.
+      </div>
+      <label class="inline" style="font-weight:500"><input id="ack" type="checkbox" required> I understand and agree.</label>
       <label for="payment">Payment Preference</label>
-      <div class="mini" style="margin-top:8px">Payment is due upon completion unless otherwise agreed. Your final amount will reflect the selected services, travel fee, and any additional work you approve.</div>
       <select id="payment"><option value="Cash">Cash</option><option value="Zelle">Zelle</option><option value="Venmo">Venmo</option></select>
       <div id="formError" class="error"></div>
       <button class="btn" id="reviewBtn" type="button">Review Booking</button>
@@ -176,7 +171,7 @@ label{display:block;font-size:13px;font-weight:750;margin:12px 0 6px}input,selec
 
 <footer>
   Self-contained mobile service — we bring our own water and power.<br>
-  Your requested date and time are subject to confirmation.
+  Additional charges may apply for excessive dirt, heavy stains, severe pet hair, or conditions requiring additional time.
 </footer>
 
 <script>
@@ -202,18 +197,18 @@ const PACKAGE_NAMES={
 };
 
 const ADDONS=[
- {key:"pet_hair_removal",name:"Pet Hair Removal",prices:{sedan:45,suv:45,large:45},from:true},
- {key:"seat_shampoo",name:"Seat Shampoo",prices:{sedan:45,suv:45,large:45}},
+ {key:"pet_hair_removal",name:"Pet Hair Removal",prices:{sedan:45,suv:45,large:45}},
+ {key:"seat_shampoo",name:"Seat Shampoo",prices:{sedan:45,suv:50,large:60}},
  {key:"leather_cleaning_conditioning",name:"Leather Cleaning & Conditioning",prices:{sedan:45,suv:45,large:45}},
  {key:"carpet_shampoo",name:"Carpet Shampoo",prices:{sedan:45,suv:45,large:45}},
- {key:"paint_decon_hand_wax",name:"Paint Decontamination + Hand Wax",prices:{sedan:55,suv:65,large:75}},
+ {key:"paint_decon_hand_wax",name:"Paint Decontamination + Hand Wax",prices:{sedan:55,suv:65,large:75},packages:["basic","interior","deluxe"]},
  {key:"iron_decon",name:"Iron Decon",prices:{sedan:35,suv:35,large:35}},
  {key:"tar_bug_wax_removal",name:"Tar, Bug & Wax Removal",prices:{sedan:35,suv:35,large:35}},
  {key:"spot_spray_treatment",name:"Spot Spray Treatment",prices:{sedan:45,suv:45,large:45}},
- {key:"water_spot_treatment",name:"Water Spot Treatment",prices:{sedan:45,suv:45,large:45},from:true},
  {key:"black_trim_restoration",name:"Black Trim Restoration",prices:{sedan:45,suv:50,large:55}},
  {key:"headlight_restoration",name:"Headlight Restoration",prices:{sedan:50,suv:50,large:50}},
- {key:"one_step_paint_correction",name:"1-Step Paint Correction",prices:{sedan:165,suv:185,large:205},packages:["express","deluxe"]}
+ {key:"express_paint_correction_bundle",name:"1-Step Paint Correction Bundle",prices:{sedan:225,suv:245,large:265},packages:["express"]},
+ {key:"one_step_paint_correction",name:"1-Step Paint Correction",prices:{sedan:170,suv:190,large:220},packages:["deluxe"]}
 ];
 
 const $=id=>document.getElementById(id);
@@ -239,7 +234,7 @@ function refreshAddonOptions(){
     if(!allowed) input.checked=false;
     input.dataset.price=price;
     label.classList.toggle("disabled",!allowed);
-    label.querySelector(".addonPrice").textContent=v?(a.from?"From $"+price:"$"+price):"$—";
+    label.querySelector(".addonPrice").textContent=v?"$"+price:"$—";
   });
 }
 
