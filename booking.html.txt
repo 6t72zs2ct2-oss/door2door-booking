@@ -1,0 +1,98 @@
+DOOR2DOOR BOOKING.HTML PATCH
+==============================
+
+Apply these edits to door2door-booking/booking.html. The SQL migration must already be applied in Supabase.
+
+1) Add a referral-code field after the Service Address input, before the closing </section> of Customer Information:
+
+<div style="margin-top:12px">
+  <label for="referralCode">Referral Code (Optional)</label>
+  <input id="referralCode" name="referralCode" autocomplete="off" maxlength="32"
+         placeholder="Example: D2D-ABC123" style="text-transform:uppercase">
+  <div class="hint">Have a friend’s Door2Door referral code? Enter it for $10 off your first eligible booking.</div>
+</div>
+
+2) Add this row in the Booking Summary immediately after Travel Fee and before Estimated Total:
+
+<div class="line"><span>Referral discount (if eligible)</span><strong id="sumReferralDiscount">$0</strong></div>
+
+3) Replace the existing updateSummary() with this version:
+
+function updateSummary(){
+  const s=selectedService(); if(!s)return;
+  const t=selectedType(),
+    ap=[...document.querySelectorAll('input[name=addon]:checked')]
+      .map(x=>addons.find(a=>a.id===x.value)).filter(Boolean),
+    base=priceFor(s,t), at=ap.reduce((n,a)=>n+priceFor(a,t),0),
+    tf=travelFee(), hasCode=!!$('referralCode')?.value.trim(),
+    discount=hasCode?10:0;
+  $('sumService').textContent=s.name;
+  $('sumVehicle').textContent=document.querySelector('#vehicleType option:checked').textContent;
+  $('sumAddons').textContent=ap.length?ap.map(a=>a.name).join(', '):'No add-ons';
+  $('sumAddonPrice').textContent=money(at);
+  $('sumTravel').textContent=tf?'+ '+money(tf):'$0';
+  if($('sumReferralDiscount')) $('sumReferralDiscount').textContent=discount?'- '+money(discount):'$0';
+  $('sumTotal').textContent=money(Math.max(0,base+at+tf-discount));
+  updateOptionPrices();
+}
+
+The browser display is only an estimate when a code is entered; the server verifies the code and applies the actual discount.
+
+4) Replace the existing submitBooking(ev) function with:
+
+async function submitBooking(ev){
+  ev.preventDefault();
+  $('status').className='status'; $('status').textContent='';
+  const btn=$('submitBtn'); btn.disabled=true; btn.textContent='Submitting...';
+  try{
+    const f=new FormData(ev.target),
+      name=f.get('fullName').trim(), phone=f.get('phone').trim(),
+      email=f.get('email').trim(), address=f.get('address').trim(),
+      make=f.get('makeModel').trim(), s=selectedService(), type=selectedType(),
+      selected=[...document.querySelectorAll('input[name=addon]:checked')]
+        .map(x=>addons.find(a=>a.id===x.value)).filter(Boolean);
+    if(!name||!phone||!address||!make||!s||!f.get('date')||!f.get('time')||!f.get('belongings'))
+      throw new Error('Please complete the required fields.');
+    const payload={
+      p_full_name:name, p_phone:phone, p_email:email||null, p_address:address,
+      p_vehicle_type:type, p_make_model:make, p_color:f.get('color')||null,
+      p_service_key:s.service_key, p_addon_keys:selected.map(a=>a.addon_key),
+      p_appointment_date:f.get('date'), p_appointment_time:f.get('time'),
+      p_special_requests:f.get('notes')||null, p_payment_preference:f.get('payment'),
+      p_travel_fee:travelFee(), p_belongings_acknowledged:true,
+      p_referral_code:f.get('referralCode').trim().toUpperCase()||null
+    };
+    const result=await api('rpc/create_public_booking_v2',{
+      method:'POST', body:JSON.stringify(payload)
+    });
+    $('formCard').style.display='none';
+    $('successPanel').classList.add('show');
+    $('successNo').textContent=result.booking_number||'Submitted';
+    const successText=$('successPanel').querySelector('p');
+    if(successText){
+      successText.textContent='Estimated total: '+money(result.total_price)+
+        (Number(result.referral_discount)>0?' (includes '+money(result.referral_discount)+' referral discount).':'')+
+        ' We will review the schedule and contact you to confirm. No payment is required now.';
+    }
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(e){
+    console.error(e);
+    $('status').className='status error';
+    let message=e.message||'Something went wrong. Please try again.';
+    try{const j=JSON.parse(message);message=j.message||j.details||message}catch{}
+    $('status').textContent=message;
+    btn.disabled=false; btn.textContent='Submit Appointment Request';
+  }
+}
+
+5) Add the input listener alongside existing vehicle/travel listeners:
+
+$('referralCode').addEventListener('input',updateSummary);
+
+Keep the existing:
+$('vehicleType').addEventListener('change',updateSummary);
+$('travelZone').addEventListener('change',updateSummary);
+$('bookingForm').addEventListener('submit',submitBooking);
+setMinDate();load();
+
+The payload calls create_public_booking_v2 in Supabase, which performs server-side customer reuse, vehicle reuse, pricing and referral validation. Do not keep the old direct POSTs to customers/vehicles/bookings alongside it.
